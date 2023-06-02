@@ -21,8 +21,28 @@ router.get("/videos/:id", (req, res) => {
     res.status(200).json(selectedVideo);
 })
 
+
 router.post("/videos", (req, res) => {
-    
+    const { title, channel, image, description, video, timestamp } = req.body;
+
+    const newVideo = {
+        id: uuidv4(),
+        title,
+        channel,
+        image,
+        description,
+        views: 0, 
+        likes: 0,
+        duration: "5:10",
+        video,
+        timestamp,
+        comments: [],
+    }
+    // const newVideoString = JSON.stringify(newVideo);
+
+    videosData.push(newVideo);
+    res.json(newVideo);
 })
+
 
 module.exports = router;
