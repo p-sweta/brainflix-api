@@ -39,7 +39,7 @@ router.post("/videos", (req, res) => {
     }
     
     videosData.push(newVideo);
-    fs.writeFileSync('./data/video-details.json', JSON.stringify(videosData));
+    fs.writeFileSync('./data/video-details.json', JSON.stringify(videosData, null, 2));
     res.status(201).json(newVideo);
 })
 
