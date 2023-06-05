@@ -4,6 +4,9 @@ const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const videosData = require('../data/video-details.json');
 
+require('dotenv').config();
+const { PORT } = process.env;
+
 router.get("/videos", (req, res) => {
     res.status(200).json(videosData.map((video) => {
         return {
@@ -11,6 +14,7 @@ router.get("/videos", (req, res) => {
             title: video.title,
             channel: video.channel,
             image: video.image
+            // image: `http://localhost:${PORT}${video.image}`
         }
     }));
 })
@@ -20,7 +24,6 @@ router.get("/videos/:id", (req, res) => {
     res.status(200).json(selectedVideo);
 })
 
-
 router.post("/videos", (req, res) => {
     const { title, description, timestamp } = req.body;
 
@@ -28,7 +31,7 @@ router.post("/videos", (req, res) => {
         id: uuidv4(),
         title,
         channel: "My Channel",
-        image: "public/images/Upload-video-preview.jpg",
+        image: "http://localhost:8080/images/Upload-video-preview.jpg",
         description,
         views: 0, 
         likes: 0,
